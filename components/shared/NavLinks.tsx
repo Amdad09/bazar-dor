@@ -1,17 +1,19 @@
+
 import { getCategories } from '@/lib/api/categories';
-import Link from 'next/link';
+import ActiveLinks from '../ui/ActiveLinks';
 
 const NavLinks = async () => {
-    const categories = await getCategories();
+  const categories = await getCategories();
     return (
-        <div className="w-full justify-start flex gap-8">
-            {categories.map((category) => (
-                <Link href={`/categories/${category.id}`} key={category.id}>
+        <div className="w-full justify-start items-center flex gap-8">
+        {categories.map((category) => (
+              
+                <ActiveLinks href={`/categories/${category.id}`} key={category.id}>
                     <span>{category.icon}</span>{' '}
-                    <span className="font-semibold text-neutral-800">
+                    <span className="font-semibold">
                         {category.nameBn}
                     </span>
-                </Link>
+                </ActiveLinks>
             ))}
         </div>
     );
