@@ -1,27 +1,27 @@
 import type { Product } from '@/types/product';
 import { banglaNumber } from '@/utils/bnNumber';
 import Link from 'next/link';
-import { FaSortDown, FaSortUp } from 'react-icons/fa';
+import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import { FiMinus } from 'react-icons/fi';
 
 interface ProductCardProps {
     product: Product;
 }
-type unitsProps = {
+type UnitsProps = {
     litre: string;
     kg: string;
     dozen: string;
     piece: string;
 };
 
-const units:unitsProps = {
+export const units:UnitsProps = {
     litre: 'লিটার',
     kg: 'কেজি',
     dozen: 'ডজন',
     piece: 'পিস',
 };
 
-export type Unit = keyof unitsProps;
+export type Unit = keyof UnitsProps;
 
 const ProductCard = ({ product }: ProductCardProps) => {
     const { image, nameBn, unit, today, change} = product;
@@ -29,13 +29,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
     let style = '';
     let icon = null;
     if (dir === 'up') {
-        style = 'text-red-600 ';
-        icon = <FaSortUp />;
+        style = 'text-red-600 bg-red-500/10';
+        icon = <FaCaretUp/>;
     } else if (dir === 'down') {
-        style = 'text-green-500 ';
-        icon = <FaSortDown />;
+        style = 'text-green-500 bg-green-500/10';
+        icon = <FaCaretDown />;
     } else {
-        style = 'text-neutral-800 ';
+        style = 'text-neutral-800 bg-neutral-700/10';
         icon = <FiMinus/>;
     }
 
@@ -57,7 +57,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
                         <span className="font-bold">{banglaNumber(today)}</span> টাকা
                     </p>
                     <p
-                        className={`bg-gray-500/10 rounded-full px-2 py-1 flex justify-center items-center ${style}`}
+                        className={`rounded-full px-2 py-0.1 flex justify-center items-center ${style}`}
                     >
                         <span className='top-8'>{icon}</span>
                         {banglaNumber(pct)}%

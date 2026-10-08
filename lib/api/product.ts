@@ -1,4 +1,6 @@
-export const getProduct = async (id:string) => {
+import type { Product } from "@/types/product";
+
+export const getProduct = async (id:string): Promise<Product>=> {
     const res = await fetch(
         `https://api.api-store.workers.dev/api/bazardor/products/${id}`,{next: {revalidate: 60}}
     );
