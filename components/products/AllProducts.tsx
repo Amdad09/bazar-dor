@@ -4,8 +4,13 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 
 const AllProducts = async () => {
     const products = await getProducts();
+
     const cheapPorducts = products.filter(product => product?.change?.dir === 'down');
+    const cheapSorted = [...cheapPorducts].sort((a, b) => a.change?.pct - b.change?.pct)
+    
     const expensivePorducts = products.filter(product => product?.change?.dir === 'up');
+    const expensiveSorted = [...expensivePorducts].sort((a,b)=> b.change?.pct - a.change?.pct)
+
   return (
       <div className="">
           {/* expensive products */}
@@ -16,27 +21,27 @@ const AllProducts = async () => {
                       আজ দাম বেড়েছে
                   </h2>
                   <p className="text-neutral-500">
-                      মোট {expensivePorducts.length}টি পণ্য দেখানো হচ্ছে
+                      বাজারের সর্বোচ্চমূল্যের ৬ টি পণ্য দেখানো হচ্ছে
                   </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {expensivePorducts.slice(0,6).map((product) => (
+                  {expensiveSorted.slice(0,6).map((product) => (
                       <ProductCard key={product.id} product={product} />
                   ))}
               </div>
           </div>
-          {/* expensive products */}
+          {/* cheap products */}
           <div>
               <div className="pt-8 pb-4">
                   <h2 className="font-bold text-xl flex gap-2 items-center">
                       <FaCaretDown color="green" /> আজ দাম কমেছে
                   </h2>
                   <p className="text-neutral-500">
-                      মোট {cheapPorducts.length}টি পণ্য দেখানো হচ্ছে
+                      বাজারের সল্পমূল্যের ৬ টি পণ্য দেখানো হচ্ছে
                   </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {cheapPorducts.slice(0, 6).map((product) => (
+                  {cheapSorted.slice(0, 6).map((product) => (
                       <ProductCard key={product.id} product={product} />
                   ))}
               </div>

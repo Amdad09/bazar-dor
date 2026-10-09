@@ -1,4 +1,4 @@
-import ProductCard from '@/components/products/ProductCard';
+import CategoriesProductAction from '@/components/categories/CategoriesProductAction';
 import Container from '@/components/ui/Container';
 import { getCategories } from '@/lib/api/categories';
 import { getCategoryProducts } from '@/lib/api/category';
@@ -30,46 +30,7 @@ const CategoryProductsPage = async ({ params }: CategoryProductsPageProps) => {
                         </div>
                     </div>
                 </div>
-                <div className="bg-white p-6 rounded-2xl border-neutral-300 mb-8">
-                    <div className="flex gap-4 items-center justify-end">
-                        <p className="text-neutral-600 font-medium">সাজান</p>
-                        <select
-                            defaultValue=""
-                            className="
-        h-10 w-36
-        rounded-lg
-        border border-neutral-300
-        bg-white
-        px-3
-        text-sm font-medium text-neutral-700
-        outline-none
-        cursor-pointer
-        transition-colors duration-200
-        hover:border-green-500
-        focus:border-green-600
-        focus:ring-2 focus:ring-green-100
-    "
-                        >
-                            <option value="" disabled>
-                                সাজান
-                            </option>
-
-                            <option value="low-to-high">কম থেকে বেশি</option>
-
-                            <option value="high-to-low">বেশি থেকে কম</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <p className="font-bold text-lg pb-2">
-                        পণ্যগুলো দেখানো হচ্ছে{' '}
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {products.map((product) => (
-                            <ProductCard key={product.id} product={product} />
-                        ))}
-                    </div>
-                </div>
+                <CategoriesProductAction products={products}/>
             </Container>
         </div>
     );
