@@ -9,3 +9,11 @@
 body {
   line-height: 1.7; 
 }
+
+.menu-horizontal details {
+  overflow: visible !important;
+}
+
+html{
+  scroll-behavior: smooth;
+}

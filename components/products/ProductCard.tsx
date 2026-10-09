@@ -1,4 +1,6 @@
-import type { Product } from '@/types/product';
+'use client'
+import { useSession } from '@/lib/auth-client';
+import { units, type Product } from '@/types/product';
 import { banglaNumber } from '@/utils/bnNumber';
 import Link from 'next/link';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
@@ -7,23 +9,12 @@ import { FiMinus } from 'react-icons/fi';
 interface ProductCardProps {
     product: Product;
 }
-type UnitsProps = {
-    litre: string;
-    kg: string;
-    dozen: string;
-    piece: string;
-};
 
-export const units:UnitsProps = {
-    litre: 'লিটার',
-    kg: 'কেজি',
-    dozen: 'ডজন',
-    piece: 'পিস',
-};
 
-export type Unit = keyof UnitsProps;
+
 
 const ProductCard = ({ product }: ProductCardProps) => {
+    const { data: session } = useSession();
     const { image, nameBn, unit, today, change} = product;
     const { dir, pct } = change;
     let style = '';
@@ -39,8 +30,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
         icon = <FiMinus/>;
     }
 
+    const href = session?.user ? `/products/${product.id}` : '/sign-in';
+
     return (
-        <Link href={`/products/${product.id}`} className="bg-white p-4 rounded-2xl border border-neutral-200">
+        
+        <Link  href={href} className="bg-white p-4 rounded-2xl border border-neutral-200">
             <div className="flex gap-2">
                 <span className="bg-neutral-100 w-12 h-12 rounded-xl inline-flex justify-center items-center">
                     <span className="text-2xl">{image}</span>

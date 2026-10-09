@@ -2,9 +2,9 @@ import Container from "../ui/Container";
 
 const Footer = () => {
   return (
-      <div className="bg-neutral-100 ">
+      <div className="bg-neutral-100 py-12">
           <Container>
-              <footer className="footer sm:footer-horizontal items-center p-4">
+              <footer className=" footer sm:footer-horizontal items-center p-4">
                   <aside className="grid-flow-col items-center">
                       <p>বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে।</p>
                   </aside>

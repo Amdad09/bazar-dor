@@ -3,35 +3,50 @@
 import { Eye, EyeSlash } from '@gravity-ui/icons';
 import { useState } from 'react';
 
+import PrimaryButton from '@/components/ui/Button';
+import Container from '@/components/ui/Container';
 import {
     Button,
     Description,
     FieldError,
     Form,
-    Input,
+    InputGroup,
     Label,
     TextField,
-    InputGroup,
 } from '@heroui/react';
-import Container from '@/components/ui/Container';
-import PrimaryButton from '@/components/ui/Button';
-import { IoReturnDownBackOutline } from 'react-icons/io5';
 import Link from 'next/link';
-import { FaGithub } from 'react-icons/fa';
+import { IoReturnDownBackOutline } from 'react-icons/io5';
+
+import AuthSocial from '@/components/ui/AuthSocial';
+import { signUp } from '@/lib/auth-client';
+import { toast } from 'sonner';
 
 export default function SignUpForm() {
     const [isVisible, setIsVisible] = useState(false);
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
+        const user = Object.fromEntries(formData.entries()) as Record<
+            string,
+            string
+        >;
 
-        const { name, email, password } = Object.fromEntries(
-            formData.entries(),
-        ) as Record<string, string>;
-
-        console.log(name, email, password);
+        const { name, email, password } = user;
+        const { data, error } = await signUp.email({
+            name,
+            email,
+            password,
+        });
+        if (error) {
+            toast.error(
+                'অ্যাকাউন্ট তৈরি করা সম্ভব হয়নি। অনুগ্রহ করে আবার চেষ্টা করুন।',
+            );
+            return;
+        }
+        console.log('Sign up data', data);
+        toast.success('আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।');
     };
 
     return (
@@ -72,10 +87,12 @@ export default function SignUpForm() {
                                     নাম
                                 </Label>
 
-                                <Input
-                                    placeholder="আপনার নাম লিখুন"
-                                    className="h-11"
-                                />
+                                <InputGroup className="h-11">
+                                    <InputGroup.Input
+                                        placeholder="আপনার নাম লিখুন"
+                                        type="text"
+                                    />
+                                </InputGroup>
 
                                 <FieldError />
                             </TextField>
@@ -101,10 +118,12 @@ export default function SignUpForm() {
                                     ইমেইল
                                 </Label>
 
-                                <Input
-                                    placeholder="আপনার ইমেইল লিখুন"
-                                    className="h-11"
-                                />
+                                <InputGroup className="h-11">
+                                    <InputGroup.Input
+                                        placeholder="আপনার ইমেইল লিখুন"
+                                        type="email"
+                                    />
+                                </InputGroup>
 
                                 <FieldError />
                             </TextField>
@@ -188,46 +207,7 @@ export default function SignUpForm() {
                             </div>
                         </Form>
                         <div className="divider">অথবা</div>
-                        <div className="flex items-center gap-2">
-                            {/* Google */}
-                            <button className="btn bg-white text-black border-[#e5e5e5]">
-                                <svg
-                                    aria-label="Google logo"
-                                    width="16"
-                                    height="16"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 512 512"
-                                >
-                                    <g>
-                                        <path
-                                            d="m0 0H512V512H0"
-                                            fill="#fff"
-                                        ></path>
-                                        <path
-                                            fill="#34a853"
-                                            d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
-                                        ></path>
-                                        <path
-                                            fill="#4285f4"
-                                            d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
-                                        ></path>
-                                        <path
-                                            fill="#fbbc02"
-                                            d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
-                                        ></path>
-                                        <path
-                                            fill="#ea4335"
-                                            d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
-                                        ></path>
-                                    </g>
-                                </svg>
-                                Google দিয়ে চালিয়ে যান
-                            </button>
-                            <button className="btn bg-white text-black border-[#e5e5e5]">
-                                <FaGithub />
-                                GitHub দিয়ে চালিয়ে যান
-                            </button>
-                        </div>
+                        <AuthSocial />
                         {/* Bottom text */}
                         <p className="mt-6 text-center text-sm text-neutral-500">
                             ইতিমধ্যে অ্যাকাউন্ট আছে?{' '}

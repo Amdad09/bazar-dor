@@ -12,7 +12,16 @@ const ActiveLinks = ({ href, children, className='' }: ActiveLinksProps) => {
     const active = href === pathname;
     return (
         <Link
-            className={`${active ? 'bg-[#05893E] text-[#F3FBF4] px-4 py-1 rounded-lg' : 'text-neutral-800'} ${className}`}
+            className={`
+        rounded-lg px-4 py-1.5
+        transition-all duration-200 ease-out
+        ${
+            active
+                ? 'bg-[#05893E] text-[#F3FBF4] shadow-sm'
+                : 'text-neutral-800 hover:bg-[#EAF7EE] hover:text-[#05893E]'
+        }
+        ${className}
+    `}
             href={href}
         >
             {children}

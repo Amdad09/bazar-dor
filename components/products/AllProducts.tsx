@@ -20,7 +20,7 @@ const AllProducts = async () => {
                   </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {expensivePorducts.map((product) => (
+                  {expensivePorducts.slice(0,6).map((product) => (
                       <ProductCard key={product.id} product={product} />
                   ))}
               </div>
@@ -29,21 +29,21 @@ const AllProducts = async () => {
           <div>
               <div className="pt-8 pb-4">
                   <h2 className="font-bold text-xl flex gap-2 items-center">
-                      <FaCaretDown color="green"/> আজ দাম কমেছে
+                      <FaCaretDown color="green" /> আজ দাম কমেছে
                   </h2>
                   <p className="text-neutral-500">
                       মোট {cheapPorducts.length}টি পণ্য দেখানো হচ্ছে
                   </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {cheapPorducts.map((product) => (
+                  {cheapPorducts.slice(0, 6).map((product) => (
                       <ProductCard key={product.id} product={product} />
                   ))}
               </div>
           </div>
 
           {/* all products */}
-          <div>
+          <div id="allProduct">
               <div className="pt-8 pb-4">
                   <h2 className="font-bold text-lg">সব পণ্য</h2>
                   <p className="text-neutral-500">

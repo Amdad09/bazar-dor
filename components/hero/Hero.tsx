@@ -12,7 +12,8 @@ const Hero = () => {
                       <Image
                           alt="Tailwind CSS hero component"
                           src={'/hero.png'}
-                          width={500} height={600}
+                          width={500}
+                          height={600}
                           className="max-w-sm "
                       />
                       <div>
@@ -27,8 +28,9 @@ const Hero = () => {
                               বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক
                               এবং দামের পরিবর্তন এক জায়গায়।
                           </p>
-
-                          <Button className="">সব পণ্য দেখুন</Button>
+                          <a href="#allProduct">
+                              <Button className="">সব পণ্য দেখুন</Button>
+                          </a>
                       </div>
                   </div>
               </div>

@@ -12,7 +12,6 @@ const CategoryProductsPage = async ({ params }: CategoryProductsPageProps) => {
     const categories = await getCategories();
     const category = categories.find((category) => category.id === slug);
     const products = await getCategoryProducts(slug);
-    console.log(category, products);
 
     return (
         <div className="bg-neutral-100 py-8">

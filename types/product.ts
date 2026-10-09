@@ -1,4 +1,3 @@
-import type { Unit } from "@/components/products/ProductCard";
 
 export interface Market {
     division: string;
@@ -23,3 +22,19 @@ export interface Product {
     unit: Unit;
     yesterday: number;
 }
+
+export type UnitsProps = {
+    litre: string;
+    kg: string;
+    dozen: string;
+    piece: string;
+};
+
+export const units: UnitsProps = {
+    litre: 'লিটার',
+    kg: 'কেজি',
+    dozen: 'ডজন',
+    piece: 'পিস',
+};
+
+export type Unit = keyof UnitsProps;
