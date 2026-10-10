@@ -11,8 +11,6 @@ interface ProductCardProps {
 }
 
 
-
-
 const ProductCard = ({ product }: ProductCardProps) => {
     const { data: session } = useSession();
     const { image, nameBn, unit, today, change} = product;
@@ -33,8 +31,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
     const href = session?.user ? `/products/${product.id}` : '/sign-in';
 
     return (
-        
-        <Link  href={href} className="bg-white p-4 rounded-2xl border border-neutral-200">
+        <Link
+            href={href}
+            className="block box-border h-full w-full min-w-0 rounded-2xl border border-neutral-200 bg-white p-4"
+        >
             <div className="flex gap-2">
                 <span className="bg-neutral-100 w-12 h-12 rounded-xl inline-flex justify-center items-center">
                     <span className="text-2xl">{image}</span>
@@ -48,12 +48,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
                 <p>আজকের দাম</p>
                 <div className="flex justify-between items-center">
                     <p className="text-lg">
-                        <span className="font-bold">{banglaNumber(today)}</span> টাকা
+                        <span className="font-bold">{banglaNumber(today)}</span>{' '}
+                        টাকা
                     </p>
                     <p
                         className={`rounded-full px-2 py-0.1 flex justify-center items-center ${style}`}
                     >
-                        <span className='top-8'>{icon}</span>
+                        <span className="top-8">{icon}</span>
                         {banglaNumber(pct)}%
                     </p>
                 </div>

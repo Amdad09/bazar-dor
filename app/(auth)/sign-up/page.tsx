@@ -19,11 +19,13 @@ import { IoReturnDownBackOutline } from 'react-icons/io5';
 
 import AuthSocial from '@/components/ui/AuthSocial';
 import { signUp } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 export default function SignUpForm() {
     const [isVisible, setIsVisible] = useState(false);
-
+    const [isPending, setIsPending] = useState(false);
+    const router = useRouter();
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -34,19 +36,29 @@ export default function SignUpForm() {
         >;
 
         const { name, email, password } = user;
-        const { data, error } = await signUp.email({
-            name,
-            email,
-            password,
-        });
-        if (error) {
+        setIsPending(true);
+        try {
+            const { data, error } = await signUp.email({
+                name,
+                email,
+                password,
+            });
+            if (error) {
+                console.log('Sign up failed:', error);
+                toast.error(error.message)
+                return;
+            }
+            router.push('/');
+            console.log('Sign up data', data);
+            toast.success('আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।');
+        } catch (error) {
+            console.log(error);
             toast.error(
                 'অ্যাকাউন্ট তৈরি করা সম্ভব হয়নি। অনুগ্রহ করে আবার চেষ্টা করুন।',
             );
-            return;
+        } finally {
+            setIsPending(false);
         }
-        console.log('Sign up data', data);
-        toast.success('আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।');
     };
 
     return (
@@ -193,8 +205,19 @@ export default function SignUpForm() {
 
                             {/* Buttons */}
                             <div className="flex gap-3 pt-2">
-                                <PrimaryButton className="flex-1 hover:bg-green-700">
-                                    অ্যাকাউন্ট তৈরি করুন
+                                <PrimaryButton
+                                    type="submit"
+                                    disabled={isPending}
+                                    className="flex-1 hover:bg-green-700"
+                                >
+                                    {isPending ? (
+                                        <>
+                                            <span className="loading loading-spinner loading-sm" />
+                                            সাইন আপ হচ্ছে...
+                                        </>
+                                    ) : (
+                                        'অ্যাকাউন্ট তৈরি করুন'
+                                    )}
                                 </PrimaryButton>
 
                                 <Button

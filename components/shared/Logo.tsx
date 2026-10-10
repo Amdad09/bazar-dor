@@ -19,8 +19,8 @@ const Logo = () => {
                 </span>
 
                 <div>
-                    <p className='font-bold text-xl'>বাজার দর</p>
-                    <p><Time/></p>
+                    <p className='font-bold text-2xl md:text-xl'>বাজার দর</p>
+                    <p className='hidden md:inline-block'><Time/></p>
                 </div>
             </div>
         </Link>

@@ -1,6 +1,7 @@
 import { getProducts } from "@/lib/api/products";
 import ProductCard from "./ProductCard";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import CardMotion from "../motion/CardMotion";
 
 const AllProducts = async () => {
     const products = await getProducts();
@@ -24,15 +25,17 @@ const AllProducts = async () => {
                       বাজারের সর্বোচ্চমূল্যের ৬ টি পণ্য দেখানো হচ্ছে
                   </p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {expensiveSorted.slice(0,6).map((product) => (
-                      <ProductCard key={product.id} product={product} />
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {expensiveSorted.slice(0, 6).map((product) => (
+                      <CardMotion key={product.id}>
+                          <ProductCard product={product} />
+                      </CardMotion>
                   ))}
               </div>
           </div>
           {/* cheap products */}
           <div>
-              <div className="pt-8 pb-4">
+              <div className="pt-12 pb-4">
                   <h2 className="font-bold text-xl flex gap-2 items-center">
                       <FaCaretDown color="green" /> আজ দাম কমেছে
                   </h2>
@@ -42,22 +45,26 @@ const AllProducts = async () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {cheapSorted.slice(0, 6).map((product) => (
-                      <ProductCard key={product.id} product={product} />
+                      <CardMotion key={product.id}>
+                          <ProductCard product={product} />
+                      </CardMotion>
                   ))}
               </div>
           </div>
 
           {/* all products */}
-          <div id="allProduct">
-              <div className="pt-8 pb-4">
-                  <h2 className="font-bold text-lg">সব পণ্য</h2>
+          <div id="all-products">
+              <div className="pt-12 pb-4">
+                  <h2 className="font-bold text-xl">সব পণ্য</h2>
                   <p className="text-neutral-500">
                       মোট {products.length}টি পণ্য দেখানো হচ্ছে
                   </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {products.map((product) => (
-                      <ProductCard key={product.id} product={product} />
+                      <CardMotion key={product.id}>
+                          <ProductCard product={product} />
+                      </CardMotion>
                   ))}
               </div>
           </div>

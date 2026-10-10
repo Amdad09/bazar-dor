@@ -36,5 +36,9 @@ export const auth = betterAuth({
             clientId: envUrl('BETTER_AUTH_GOOGLE_CLIENT_ID'),
             clientSecret: envUrl('BETTER_AUTH_CLIENT_SECRET'),
         },
+        github: {
+            clientId:'',
+            clientSecret:''
+        }
     },
 });

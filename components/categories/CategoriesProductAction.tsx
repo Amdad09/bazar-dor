@@ -3,6 +3,7 @@
 import type { Product } from '@/types/product';
 import { useState } from 'react';
 import ProductCard from '../products/ProductCard';
+import CardMotion from '../motion/CardMotion';
 
 interface CategoriesProductActionProps {
     products: Product[];
@@ -58,7 +59,9 @@ const CategoriesProductAction = ({
                 <p className="font-bold text-lg pb-2">পণ্যগুলো দেখানো হচ্ছে </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {sortedProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
+                        <CardMotion key={product.id}>
+                            <ProductCard product={product} />
+                        </CardMotion>
                     ))}
                 </div>
             </div>

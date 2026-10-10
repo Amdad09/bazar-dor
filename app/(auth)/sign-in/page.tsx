@@ -3,46 +3,58 @@
 import { Eye, EyeSlash } from '@gravity-ui/icons';
 import { useState } from 'react';
 
+import AuthSocial from '@/components/ui/AuthSocial';
+import PrimaryButton from '@/components/ui/Button';
+import Container from '@/components/ui/Container';
+import { signIn } from '@/lib/auth-client';
 import {
     Button,
     Description,
     FieldError,
     Form,
+    InputGroup,
     Label,
     TextField,
-    InputGroup,
 } from '@heroui/react';
-import Container from '@/components/ui/Container';
-import PrimaryButton from '@/components/ui/Button';
-import { IoReturnDownBackOutline } from 'react-icons/io5';
 import Link from 'next/link';
-import { signIn } from '@/lib/auth-client';
+import { IoReturnDownBackOutline } from 'react-icons/io5';
 import { toast } from 'sonner';
-import AuthSocial from '@/components/ui/AuthSocial';
+import { useRouter } from 'next/navigation';
 
 export default function SignInForm() {
     const [isVisible, setIsVisible] = useState(false);
-
+    const [isPending, setIsPending] = useState(false);
+    const router = useRouter()
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
 
-        const user = Object.fromEntries(
-            formData.entries(),
-        ) as Record<string, string>;
+        const user = Object.fromEntries(formData.entries()) as Record<
+            string,
+            string
+        >;
         const { email, password } = user;
-
-        const { data, error } = await signIn.email({
-            email, password,
-        })
-        if (error) {
-            toast.error('ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।');
-            return;
+        setIsPending(true);
+        try {
+            const { data, error } = await signIn.email({
+                email,
+                password,
+            });
+            if (error) {
+                console.log('Sign in failed:', error);
+                toast.error(error.message);
+                return;
+            }
+            router.push('/');
+            console.log('Sign in data', data);
+            toast.success('সফলভাবে সাইন ইন হয়েছে।');
+        } catch (error) {
+            console.error('Sign in failed:', error);
+            toast.error('সাইন ইন করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+        } finally {
+            setIsPending(false);
         }
-        console.log("Sign in data", data);
-        toast.success('সফলভাবে সাইন ইন হয়েছে।');
-        
     };
 
     return (
@@ -164,8 +176,19 @@ export default function SignInForm() {
 
                             {/* Buttons */}
                             <div className="flex gap-3 pt-2">
-                                <PrimaryButton className="flex-1 hover:bg-green-700">
-                                    অ্যাকাউন্ট তৈরি করুন
+                                <PrimaryButton
+                                    type="submit"
+                                    disabled={isPending}
+                                    className="flex-1 hover:bg-green-700"
+                                >
+                                    {isPending ? (
+                                        <>
+                                            <span className="loading loading-spinner loading-sm" />
+                                            সাইন ইন হচ্ছে...
+                                        </>
+                                    ) : (
+                                        'সাইন ইন করুন'
+                                    )}
                                 </PrimaryButton>
 
                                 <Button
