@@ -14,7 +14,7 @@ const mongoUrl = envUrl('BETTER_AUTH_MONGO_URL');
 
 if (secret.length < 32) throw new Error('At least 32 characters');
 const parsedUrl = new URL(baseUrl);
-if (parsedUrl.protocol !== 'https' && process.env.NODE_ENV === 'production')
+if (parsedUrl.protocol !== 'https://' && process.env.NODE_ENV === 'production')
     throw new Error('Must be nedded htttps protocol!');
 
 const client = new MongoClient(mongoUrl);
