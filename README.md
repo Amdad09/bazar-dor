@@ -46,7 +46,7 @@ Configure the required environment variables in `.env.local`, then run the devel
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [https://bazar-dor-web-gamma.vercel.app/](https://bazar-dor-web-gamma.vercel.app/) in your browser.
 
 ## 🌟 Vision
 
