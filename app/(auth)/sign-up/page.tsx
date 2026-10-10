@@ -35,7 +35,11 @@ export default function SignUpForm() {
             string
         >;
 
-        const { name, email, password } = user;
+        const { name, email, password, surePassword } = user;
+        if (password !== surePassword) {
+            toast.error('দুটি পাসওয়ার্ড মিলছে না।');
+            return;
+        }
         setIsPending(true);
         try {
             const { data, error } = await signUp.email({
@@ -48,7 +52,7 @@ export default function SignUpForm() {
                 toast.error(error.message)
                 return;
             }
-            router.push('/');
+            router.push('/sign-in');
             console.log('Sign up data', data);
             toast.success('আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।');
         } catch (error) {
@@ -169,6 +173,63 @@ export default function SignUpForm() {
                                 <InputGroup className="h-11">
                                     <InputGroup.Input
                                         placeholder="পাসওয়ার্ড লিখুন"
+                                        type={isVisible ? 'text' : 'password'}
+                                    />
+
+                                    <InputGroup.Suffix className="pe-1">
+                                        <Button
+                                            isIconOnly
+                                            aria-label={
+                                                isVisible
+                                                    ? 'পাসওয়ার্ড লুকান'
+                                                    : 'পাসওয়ার্ড দেখুন'
+                                            }
+                                            size="sm"
+                                            variant="ghost"
+                                            onPress={() =>
+                                                setIsVisible((prev) => !prev)
+                                            }
+                                        >
+                                            {isVisible ? (
+                                                <Eye className="size-4" />
+                                            ) : (
+                                                <EyeSlash className="size-4" />
+                                            )}
+                                        </Button>
+                                    </InputGroup.Suffix>
+                                </InputGroup>
+
+                                <FieldError />
+                            </TextField>
+
+                            <TextField
+                                isRequired
+                                minLength={8}
+                                name="surePassword"
+                                type="password"
+                                validate={(value) => {
+                                    if (value.length < 8) {
+                                        return 'পাসওয়ার্ডে কমপক্ষে ৮টি অক্ষর থাকতে হবে';
+                                    }
+
+                                    if (!/[A-Z]/.test(value)) {
+                                        return 'কমপক্ষে ১টি বড় হাতের অক্ষর থাকতে হবে';
+                                    }
+
+                                    if (!/[0-9]/.test(value)) {
+                                        return 'কমপক্ষে ১টি সংখ্যা থাকতে হবে';
+                                    }
+
+                                    return null;
+                                }}
+                            >
+                                <Label className="mb-1.5 font-medium text-neutral-800">
+                                    পাসওয়ার্ড নিশ্চিত করুন
+                                </Label>
+
+                                <InputGroup className="h-11">
+                                    <InputGroup.Input
+                                        placeholder="পুনরায় পাসওয়ার্ড লিখুন"
                                         type={isVisible ? 'text' : 'password'}
                                     />
 

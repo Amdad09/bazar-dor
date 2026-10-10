@@ -4,7 +4,7 @@ import { MongoClient } from 'mongodb';
 
 export const envUrl = (name: string) => {
     const result = process.env[name];
-    if (!result) throw new Error(`${process.env.name} is required!`);
+    if (!result) throw new Error(`${name} is required!`);
     return result;
 };
 
@@ -34,11 +34,11 @@ export const auth = betterAuth({
     socialProviders: {
         google: {
             clientId: envUrl('BETTER_AUTH_GOOGLE_CLIENT_ID'),
-            clientSecret: envUrl('BETTER_AUTH_CLIENT_SECRET'),
+            clientSecret: envUrl('BETTER_AUTH_GOOGLE_CLIENT_SECRET'),
         },
         github: {
-            clientId:'',
-            clientSecret:''
-        }
+            clientId: envUrl('BETTER_AUTH_GITHUB_CLIENT_ID'),
+            clientSecret: envUrl('BETTER_AUTH_GITHUB_CLIENT_SECRET'),
+        },
     },
 });
