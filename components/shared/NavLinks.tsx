@@ -11,7 +11,7 @@ const NavLinks = async () => {
             <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto whitespace-nowrap ">
                 <ActiveLinks
                     href="/"
-                    className="shrink-0 px-3 py-1 sm:px-4 sm:py-1"
+                    className="shrink-0 px-3 py-1 sm:px-4 sm:py-1 font-semibold"
                 >
                     সব পণ্য
                 </ActiveLinks>
