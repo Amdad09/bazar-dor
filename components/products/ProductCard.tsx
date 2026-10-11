@@ -33,10 +33,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
     return (
         <Link
             href={href}
-            className="block box-border h-full w-full min-w-0 rounded-2xl border border-neutral-200 bg-white p-4"
+            className="group block h-full w-full min-w-0 rounded-2xl border border-neutral-200 bg-white p-4 duration-300 transition-transform ease-out hover:-translate-y-1 hover:border-green-400 hover:shadow-md hover:shadow-green-500/5 active:scale-[0.99] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
         >
             <div className="flex gap-2">
-                <span className="bg-neutral-100 w-12 h-12 rounded-xl inline-flex justify-center items-center">
+                <span className="bg-green-50 w-12 h-12 rounded-xl inline-flex justify-center items-center">
                     <span className="text-2xl">{image}</span>
                 </span>
                 <div>

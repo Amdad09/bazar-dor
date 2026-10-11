@@ -4,7 +4,7 @@ import type { Product } from '@/types/product';
 import { useState } from 'react';
 import ProductCard from '../products/ProductCard';
 import CardMotion from '../motion/CardMotion';
-
+import { banglaNumber } from '@/utils/bnNumber';
 interface CategoriesProductActionProps {
     products: Product[];
 }
@@ -25,12 +25,14 @@ const CategoriesProductAction = ({
         <>
             <div className="bg-white p-6 rounded-2xl border-neutral-300 mb-8">
                 {/* <CategoriesProductAction products={ products} /> */}
-                <div className="flex gap-4 items-center justify-end">
-                    <p className="text-neutral-600 font-medium">সাজান</p>
-                    <select
-                        value={sortedBy}
-                        onChange={(e) => setSortedBy(e.target.value)}
-                        className="
+                <div className="flex gap-4 items-center justify-between">
+                    <p>মোট {banglaNumber(sortedProducts.length)} টি পণ্য</p>
+                    <div className='flex gap-2 items-center'>
+                        <p className="text-neutral-600 font-medium">সাজান</p>
+                        <select
+                            value={sortedBy}
+                            onChange={(e) => setSortedBy(e.target.value)}
+                            className="
         h-10 w-36
         rounded-lg
         border border-neutral-300
@@ -44,15 +46,16 @@ const CategoriesProductAction = ({
         focus:border-green-600
         focus:ring-2 focus:ring-green-100
     "
-                    >
-                        <option value="default" disabled>
-                            ডিফল্ট
-                        </option>
+                        >
+                            <option value="default" disabled>
+                                ডিফল্ট
+                            </option>
 
-                        <option value="low-to-high">কম থেকে বেশি</option>
+                            <option value="low-to-high">কম থেকে বেশি</option>
 
-                        <option value="high-to-low">বেশি থেকে কম</option>
-                    </select>
+                            <option value="high-to-low">বেশি থেকে কম</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div>

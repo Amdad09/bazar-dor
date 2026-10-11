@@ -7,6 +7,7 @@
 }
 
 body {
+  background-color: rgb(246, 250, 246);
   line-height: 1.7; 
 }
 
@@ -14,6 +15,12 @@ body {
   overflow: visible !important;
 }
 
-html{
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+html {
+  scroll-padding-top: 5rem; 
 }

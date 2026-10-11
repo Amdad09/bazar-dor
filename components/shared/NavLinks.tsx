@@ -9,6 +9,12 @@ const NavLinks = async () => {
     return (
         <div className="flex w-full items-center justify-between gap-2 sm:gap-4">
             <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto whitespace-nowrap ">
+                <ActiveLinks
+                    href="/"
+                    className="shrink-0 px-3 py-1 sm:px-4 sm:py-1"
+                >
+                    সব পণ্য
+                </ActiveLinks>
                 {categories.map((category) => (
                     <ActiveLinks
                         href={`/categories/${category.id}`}
@@ -18,9 +24,7 @@ const NavLinks = async () => {
                         <span className="hidden lg:inline-block pr-1">
                             {category.icon}
                         </span>{' '}
-                        <span className="font-semibold">
-                            {category.nameBn}
-                        </span>
+                        <span className="font-semibold">{category.nameBn}</span>
                     </ActiveLinks>
                 ))}
             </div>

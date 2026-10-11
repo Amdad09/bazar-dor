@@ -27,8 +27,8 @@ const ActiveLinks = ({
                 transition-all duration-200 ease-out
                 ${
                     active
-                        ? 'bg-[#05893E] text-[#F3FBF4] shadow-sm'
-                        : 'text-neutral-800 hover:bg-[#EAF7EE] '
+                        ? 'bg-[#EAF7EE] text-[#05893E] shadow-sm'
+                        : 'text-neutral-600 hover:bg-[#EAF7EE] '
                 }
                 ${className}
             `}

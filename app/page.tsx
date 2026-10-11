@@ -4,7 +4,7 @@ import Container from "@/components/ui/Container";
 
 const Home = () => {
   return (
-      <div className="bg-neutral-100">
+      <div className="">
           <Container>
               <Hero />
               <AllProducts />
