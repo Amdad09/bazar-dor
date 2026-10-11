@@ -1,4 +1,3 @@
-
 import Container from '@/components/ui/Container';
 import { getProduct } from '@/lib/api/product';
 import { units } from '@/types/product';
@@ -29,7 +28,6 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
     const maximum = Math.max(...markets.map((market) => market.max));
     const minimum = Math.min(...markets.map((market) => market.min));
 
-
     let style = '';
     let icon = null;
     let todayPrice = '';
@@ -44,7 +42,7 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
     } else {
         style = 'text-neutral-800 bg-neutral-700/10';
         icon = <FiMinus />;
-        todayPrice = 'সমান আছে';
+        todayPrice = 'একই আছে';
     }
     return (
         <div className="bg-neutral-100">
@@ -85,8 +83,10 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
                             </p>
                             <p className="mt-2">
                                 গতকালের তুলনায় আজ দাম{' '}
-                                <strong>{todayPrice}</strong> ·
-                                {banglaNumber(Math.abs(today - yesterday))} টাকা
+                                <strong>{todayPrice}</strong>{' '}
+                                {todayPrice !== 'একই আছে' &&
+                                    `·
+                                ${banglaNumber(Math.abs(today - yesterday))} টাকা`}
                             </p>
                         </div>
                     </div>
