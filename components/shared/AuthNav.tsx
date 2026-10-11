@@ -56,7 +56,7 @@ const AuthNav = () => {
                 </div>
                 <ul
                     tabIndex={0}
-                    className="menu dropdown-content z-50 mt-2 w-auto rounded-box bg-base-100 p-4 shadow-lg"
+                    className="menu dropdown-content z-50 mt-2 w-70 overflow-x-scroll rounded-box bg-base-100 p-4 shadow-lg"
                 >
                     <li className="">
                         <span className="font-bold text-neutral-600 text-base leading-none hover:bg-white cursor-default">

@@ -53,6 +53,7 @@ export default function SignUpForm() {
                 return;
             }
             router.push('/sign-in');
+            // router.refresh();
             console.log('Sign up data', data);
             toast.success('আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।');
         } catch (error) {

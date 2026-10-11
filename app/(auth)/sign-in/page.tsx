@@ -41,8 +41,9 @@ export default function SignInForm() {
                 email,
                 password,
             });
+            console.log(data);
             if (error) {
-                console.log('Sign in failed:', error);
+                console.log('Sign in failed:', error, data);
                 toast.error(error.message);
                 return;
             }

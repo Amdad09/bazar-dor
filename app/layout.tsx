@@ -27,7 +27,7 @@ export default function RootLayout({ children }: Readonly<{children: ReactNode}>
           <body className="min-h-full flex flex-col font-sans">
               <Navbar />
               {children}
-              <Toaster position="top-right" richColors />
+              <Toaster position="top-center" richColors />
               <Footer />
           </body>
       </html>

@@ -48,6 +48,7 @@ const ProfilePage = () => {
         setSaving(true);
         try {
             await updateUser({ name: newName.trim() });
+            router.push('/');
             toast.success('আপনার নামটি আপডেট হয়েছে');
         } catch {
             toast.error('নাম আপডেট করা যায়নি');
@@ -58,8 +59,8 @@ const ProfilePage = () => {
 
     const handleSignOut = async () => {
         await signOut();
-        toast.success('সাইন আউট সফল হয়েছে');
         router.push('/');
+        toast.success('সাইন আউট সফল হয়েছে');
     };
 
     return (
@@ -139,6 +140,7 @@ const ProfilePage = () => {
                             type="submit"
                             className="mt-4 w-full"
                             disabled={saving}
+
                         >
                             {saving ? 'আপডেট হচ্ছে...' : 'আপডেট'}
                         </Button>
